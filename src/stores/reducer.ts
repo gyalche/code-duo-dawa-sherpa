@@ -3,7 +3,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import spellSlice from './spellSlice';
 
 const rootReducer = combineReducers({
-    location: spellSlice,
+    spell: spellSlice,
 });
 
 export default rootReducer;

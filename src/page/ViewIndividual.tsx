@@ -20,7 +20,7 @@ const ViewIndividual = () => {
     <Typography variant="h4">
       {myData?.name}
     </Typography>
-    {myData?.desc?.map((data:any, index:index)=>(
+    {myData?.desc?.map((data:string, index:number)=>(
       <p key={index}>{data}</p>
     ))}
   </Box>
