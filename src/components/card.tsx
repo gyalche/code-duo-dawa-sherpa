@@ -22,6 +22,10 @@ export default function BasicCard({data}:{data:cardType}) {
     navigate(`/${name}`)
   }
 
+  const addToFavroite=(e:React.MouseEvent<SVGSVGElement, MouseEvent>)=>{
+    e.stopPropagation()
+  }
+
   return (
     <Card sx={{ minWidth: 300, cursor:'pointer', alignSelf:'flex-start' }} onClick={()=>viewSingle(data?.index)}>
       <CardContent>
@@ -29,7 +33,7 @@ export default function BasicCard({data}:{data:cardType}) {
             <Typography variant="h5">
               {data?.name}
             </Typography>
-            <FavoriteBorderIcon />
+            <FavoriteBorderIcon onClick={(e)=>addToFavroite(e)} />
         </Box>
         <Typography>
       Label {data?.level}
