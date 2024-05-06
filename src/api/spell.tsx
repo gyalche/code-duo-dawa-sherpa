@@ -8,7 +8,9 @@ export const getSpell=async()=>{
         return error;
     }
 }
-export const getIndividualSpell=async(name:string)=>{
+export const getIndividualSpell=async(data:any)=>{
+    const [_, name]=data.queryKey;
+
     try {
         const res=await API.get(`spells/${name}`);
         return res.data;

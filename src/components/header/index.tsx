@@ -1,11 +1,14 @@
-import { Box } from '@mui/material'
+import { Badge } from '@mui/material'
+import GradeIcon from '@mui/icons-material/Grade';
 
 const Header = () => {
   return (
-    <div className="header">
-      <Box></Box>
-      <Box>two</Box>
-    </div>
+     <div className='head'>
+                <input type='text' placeholder="search spell" />
+                 <Badge badgeContent={4} color="primary">
+                    <GradeIcon color="action" />
+                </Badge>
+            </div>
   )
 }
 
