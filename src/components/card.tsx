@@ -34,6 +34,11 @@ export default function BasicCard({data}:{data:cardType}) {
     dispatch(addFavroite(name))
   }
 
+  //remove from favroite
+  const removeFromFavroite=(e:React.MouseEvent<SVGSVGElement, MouseEvent>, name:string)=>{
+    e.stopPropagation();
+  }
+
   // const value=useSelector((state:any)=>state?.spell)
   // console.log("this is my value", value)
 
@@ -44,16 +49,16 @@ export default function BasicCard({data}:{data:cardType}) {
             <Typography variant="h5">
               {data?.name}
             </Typography>
-            {!fav ? (
-<IconButton onClick={(e)=>addToFavroite(e, data?.index)}>
-
-  <FavoriteBorderIcon  />
-</IconButton>
-            ):(
-              <IconButton onClick={(e)=>addToFavroite(e, data?.index)}>
-
+            {listOfFavroite?.includes(data?.index) ? (
+               <IconButton onClick={(e)=>removeFromFavroite(e, data?.index)}>
                 <FavoriteIcon sx={{color:'red'}} />
               </IconButton>
+
+            ):  (
+             <IconButton onClick={(e)=>addToFavroite(e, data?.index)}>
+
+                  <FavoriteBorderIcon  />
+                </IconButton>
             )}
         </Box>
         <Typography>
