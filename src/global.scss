@@ -6,7 +6,7 @@
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 :root{
-
+  --bg-color: #303841
 }
 
 @mixin flex-row-spaceBetween{
@@ -32,6 +32,16 @@
     margin-top:80px;
   
 }
+.card{
+   min-width: 350px;
+  cursor:pointer;
+    align-self:flex-start;
+}
+.card:hover{
+ transform: scale(1.1);
+  transition: 0.7s;
+  color: rgb(128, 128, 128);
+}
 
 }
 .head{
@@ -44,7 +54,8 @@
   background-color: white;
   top:0;
   padding:20px;
-  box-shadow:5px 13px 11px -15px #000000
+  box-shadow:5px 13px 11px -15px #000000;
+  z-index:999;
 
 }
 .head input{

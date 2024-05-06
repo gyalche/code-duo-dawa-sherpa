@@ -6,9 +6,10 @@ import Typography from '@mui/material/Typography';
 import { cardType } from '../@types/index';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addFavroite } from '../stores/spellSlice';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { IconButton } from '@mui/material';
 const bull = (
   <Box
     component="span"
@@ -22,9 +23,7 @@ export default function BasicCard({data}:{data:cardType}) {
   const [fav, setFav]=React.useState<boolean>(false)
   const dispatch=useDispatch()
   const navigate=useNavigate()
-
-  //  const { isLoading, isSuccess, isError, data}=useQuery(['get-single-spell', params?.name], getIndividualSpell)
-
+  const {listOfFavroite}=useSelector((state:any)=>state?.spell)
   const viewSingle=(name:string)=>{
     navigate(`/${name}`)
   }
@@ -39,17 +38,22 @@ export default function BasicCard({data}:{data:cardType}) {
   // console.log("this is my value", value)
 
   return (
-    <Card sx={{ minWidth: 300, cursor:'pointer', alignSelf:'flex-start' }} onClick={()=>viewSingle(data?.index)}>
+    <Card className="card" onClick={()=>viewSingle(data?.index)}>
       <CardContent>
         <Box sx={{display:'flex', justifyContent:'space-between'}}>
             <Typography variant="h5">
               {data?.name}
             </Typography>
             {!fav ? (
+<IconButton onClick={(e)=>addToFavroite(e, data?.index)}>
 
-              <FavoriteBorderIcon onClick={(e)=>addToFavroite(e, data?.index)} />
+  <FavoriteBorderIcon  />
+</IconButton>
             ):(
-              <FavoriteIcon sx={{color:'red'}} onClick={(e)=>addToFavroite(e, data?.index)}/>
+              <IconButton onClick={(e)=>addToFavroite(e, data?.index)}>
+
+                <FavoriteIcon sx={{color:'red'}} />
+              </IconButton>
             )}
         </Box>
         <Typography>
