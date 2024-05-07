@@ -1,17 +1,17 @@
-import { getListOfFavroite } from './spellSlice';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../app/store'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Define a type for the slice state
 interface spellSlice {
     listOfFavroite: Array<object>,
     search: string | number,
+    view: boolean,
 }
 
 // Define the initial state using that type
 const initialState: spellSlice = {
     listOfFavroite: [],
     search: '',
+    view: true,
 }
 
 const spellSlice = createSlice({
@@ -31,12 +31,15 @@ const spellSlice = createSlice({
         },
         addSearch: (state, action: PayloadAction<any>) => {
             state.search = action.payload;
+        },
+        setView: (state, action: PayloadAction<boolean>) => {
+            state.view = action.payload
         }
-
     },
 })
 
-export const { addFavroite, addSearch, clearFavroite, removeFromFavroite } = spellSlice.actions;
-export const getSearchValue = (state: any) => state?.spell
+export const { addFavroite, addSearch, clearFavroite, removeFromFavroite, setView } = spellSlice.actions;
+export const getSearchValue = (state: any) => state?.spell;
+export const getView = (state: any) => state?.spell?.view
 
 export default spellSlice.reducer

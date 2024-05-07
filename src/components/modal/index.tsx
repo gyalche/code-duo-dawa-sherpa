@@ -1,10 +1,8 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import BasicCard from '../card';
+import Typography from '@mui/material/Typography';
 import { cardType } from '../../@types';
+import BasicCard from '../card';
 
 const style = {
   position: 'fixed',
@@ -35,7 +33,6 @@ export default function MyModal({
 
   handleClose,
 }: modalProps) {
-  console.log('modalData', data);
   return (
     <div>
       <Modal

@@ -1,16 +1,13 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { cardType } from '../@types/index';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useNavigate } from 'react-router-dom';
+import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavroite, removeFromFavroite } from '../stores/spellSlice';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { cardType } from '../@types/index';
 import { FavSelectIcon, UnFavSelectIcon } from '../UI/IconButton/iconButton';
+import { addFavroite, removeFromFavroite } from '../stores/spellSlice';
 
 const bull = (
   <Box
@@ -35,7 +32,6 @@ export default function BasicCard({ data }: { data: cardType }) {
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
     data: any
   ) => {
-    console.log('this is check', data);
     e.stopPropagation();
     setFav(!fav);
     dispatch(addFavroite(data));

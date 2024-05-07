@@ -1,21 +1,21 @@
-import { useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getIndividualSpell } from '../api/spell';
 import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Layout } from './Layout';
+import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { FavSelectIcon, UnFavSelectIcon } from '../UI/IconButton/iconButton';
-import { addToFavroite, removeFavroite } from '../utils';
+import { useParams } from 'react-router-dom';
 import { BackButton } from '../UI/Buttons';
+import { FavSelectIcon, UnFavSelectIcon } from '../UI/IconButton/iconButton';
+import { getIndividualSpell } from '../api/spell';
+import { addToFavroite, removeFavroite } from '../utils';
+import { Layout } from './Layout';
 
 const ViewIndividual = () => {
   const [myData, setMyData] = useState<any>(null);
   const [fav, setFav] = useState(false);
+
   const params = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  console.log('this is params', params);
+
   const { isLoading, isSuccess, isError, data } = useQuery(
     ['get-single-spell', params?.mainname, params?.subname],
     getIndividualSpell

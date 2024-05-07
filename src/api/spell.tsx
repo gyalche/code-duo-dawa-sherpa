@@ -11,7 +11,6 @@ export const getSpell = async (data: ay) => {
 };
 export const getIndividualSpell = async (data: any) => {
   const [_, mainname, subname] = data.queryKey;
-  console.log('this is check', mainname, subname);
 
   try {
     const res = await API.get(`/api/${mainname}/${subname}`);

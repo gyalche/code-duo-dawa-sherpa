@@ -1,4 +1,4 @@
-import { addFavroite } from "../stores/spellSlice";
+import { addFavroite, removeFromFavroite } from "../stores/spellSlice";
 
 export const addToFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
@@ -19,4 +19,5 @@ export const removeFavroite = (
     dispatch?: any,
 ) => {
     e.stopPropagation();
+    dispatch(removeFromFavroite(name))
 };

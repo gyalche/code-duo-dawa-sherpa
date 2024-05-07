@@ -1,17 +1,18 @@
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { getSpell } from '../api/spell';
-import { Box } from '@mui/material';
-import { cardType } from '../@types/index';
-import BasicCard from '../components/card';
-import { Layout } from './Layout';
-import SkeletionLoading from '../components/loading/skeletionLoading';
 import { useSelector } from 'react-redux';
-import { getSearchValue } from '../stores/spellSlice';
-import { useState, useEffect } from 'react';
 import { FixedSizeList as List } from 'react-window';
+import { getSpell } from '../api/spell';
+import BasicCard from '../components/card';
+import SkeletionLoading from '../components/loading/skeletionLoading';
+import { getSearchValue, getView } from '../stores/spellSlice';
+import { Layout } from './Layout';
+import { Box } from '@mui/material';
 const HomePage = () => {
   const [myData, setMyData] = useState<any>(null);
+
   const { search } = useSelector(getSearchValue);
+  const view = useSelector(getView);
 
   const { data, isLoading, isSuccess, isError, refetch } = useQuery(
     ['get-spell', search],
@@ -21,12 +22,11 @@ const HomePage = () => {
   useEffect(() => {
     setMyData(data);
   }, [isSuccess]);
+
   useEffect(() => {
     refetch();
     setMyData(data);
   }, [search]);
-
-  console.log('this is my data', myData);
 
   return (
     <Layout>
@@ -39,38 +39,48 @@ const HomePage = () => {
               // < sx={{display:'flex', alignItems:'center', justifyContent:'center'}}>
               <SkeletionLoading />
             ) : (
-              // <>
-              //   {myData?.results?.map((data: cardType, index: number) => (
-              //     <Box sx={{ padding: '10px' }} key={data?.index}>
-              //       <BasicCard data={data} />
-              //     </Box>
-              //   ))}
-              // </>
-
-              <List
-                // innerElementType="ul"
-                itemData={myData?.results || []}
-                itemCount={myData?.results?.length || 0}
-                itemKey={(index) => String(index)}
-                itemSize={140} // Height of each row
-                columnCount={1} // Display one column
-                height={window.innerHeight - 100}
-                width={500}
-                overscanColumnCount={3} // Adjust the width as needed to fit within the parent container
-              >
-                {({ data, index, style }) => (
-                  <div
-                    key={data?.index}
-                    style={{
-                      ...style,
-                      padding: '10px',
-                      width: '100%',
-                    }} // Adjust the width of each row
+              <>
+                {!view ? (
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    {myData?.results?.map((data: cardType, index: number) => (
+                      <Box sx={{ padding: '10px' }} key={data?.index}>
+                        <BasicCard data={data} />
+                      </Box>
+                    ))}
+                  </Box>
+                ) : (
+                  <List
+                    // innerElementType="ul"
+                    itemData={myData?.results || []}
+                    itemCount={myData?.results?.length || 0}
+                    itemKey={(index) => String(index)}
+                    itemSize={140}
+                    columnCount={2}
+                    height={window.innerHeight - 150}
+                    width={500}
+                    overscanColumnCount={3} // Adjust the width as needed to fit within the parent container
                   >
-                    <BasicCard data={data[index]} />
-                  </div>
+                    {({ data, index, style }) => (
+                      <div
+                        key={data?.index}
+                        style={{
+                          ...style,
+                          padding: '10px',
+                          width: '100%',
+                        }} // Adjust the width of each row
+                      >
+                        <BasicCard data={data[index]} />
+                      </div>
+                    )}
+                  </List>
                 )}
-              </List>
+              </>
             )}
           </>
         )}
