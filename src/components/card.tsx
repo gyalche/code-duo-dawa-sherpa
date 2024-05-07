@@ -7,10 +7,11 @@ import { cardType } from '../@types/index';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavroite, clearFavroite } from '../stores/spellSlice';
+import { addFavroite, removeFromFavroite } from '../stores/spellSlice';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton } from '@mui/material';
 import { FavSelectIcon, UnFavSelectIcon } from '../UI/IconButton/iconButton';
+
 const bull = (
   <Box
     component="span"
@@ -41,13 +42,13 @@ export default function BasicCard({ data }: { data: cardType }) {
   };
 
   //remove from favroite
-  const removeFromFavroite = (
+  const removeFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    data: any
+    index: string
   ) => {
     e.stopPropagation();
-    dispatch(clearFavroite());
-    // dispatch(removeFavroite(index));
+    // dispatch(clearFavroite());
+    dispatch(removeFromFavroite(index));
   };
 
   const favIndex = Array.from(
@@ -60,9 +61,7 @@ export default function BasicCard({ data }: { data: cardType }) {
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h5">{data?.name}</Typography>
           {favIndex?.includes(data?.index) ? (
-            <FavSelectIcon
-              onClick={(e) => removeFromFavroite(e, data?.index)}
-            />
+            <FavSelectIcon onClick={(e) => removeFavroite(e, data?.index)} />
           ) : (
             <UnFavSelectIcon onClick={(e) => addToFavroite(e, data)} />
           )}

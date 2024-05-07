@@ -13,7 +13,7 @@ export const addToFavroite = (
 };
 
 //remove from favroite
-export const removeFromFavroite = (
+export const removeFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
     name: string,
     dispatch?: any,

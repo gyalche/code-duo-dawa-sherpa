@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Layout } from './Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { FavSelectIcon, UnFavSelectIcon } from '../UI/IconButton/iconButton';
-import { addToFavroite, removeFromFavroite } from '../utils';
+import { addToFavroite, removeFavroite } from '../utils';
 import { BackButton } from '../UI/Buttons';
 
 const ViewIndividual = () => {
@@ -42,7 +42,7 @@ const ViewIndividual = () => {
           <>
             {favIndex?.includes(data?.index) ? (
               <FavSelectIcon
-                onClick={(e) => removeFromFavroite(e, data?.index, dispatch)}
+                onClick={(e) => removeFavroite(e, data?.index, dispatch)}
               />
             ) : (
               <UnFavSelectIcon
