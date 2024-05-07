@@ -23,7 +23,7 @@ const spellSlice = createSlice({
             state.listOfFavroite.push(action.payload)
         },
         removeFromFavroite: (state, action: PayloadAction<any>) => {
-            const index = action.payload;
+            const index = state.listOfFavroite.findIndex((idx) => idx.index === action.payload);
             state.listOfFavroite?.splice(index, 1)
         },
         clearFavroite: (state) => {

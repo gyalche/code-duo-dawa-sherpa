@@ -44,7 +44,7 @@ export default function BasicCard({ data }: { data: cardType }) {
   //remove from favroite
   const removeFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    index: string
+    index: any
   ) => {
     e.stopPropagation();
     // dispatch(clearFavroite());
@@ -61,7 +61,9 @@ export default function BasicCard({ data }: { data: cardType }) {
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h5">{data?.name}</Typography>
           {favIndex?.includes(data?.index) ? (
-            <FavSelectIcon onClick={(e) => removeFavroite(e, data?.index)} />
+            <>
+              <FavSelectIcon onClick={(e) => removeFavroite(e, data?.index)} />
+            </>
           ) : (
             <UnFavSelectIcon onClick={(e) => addToFavroite(e, data)} />
           )}
