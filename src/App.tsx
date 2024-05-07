@@ -1,19 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import HomePage from './page/HomePage'
-import ViewIndividual from './page/ViewIndividual'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './page/HomePage';
+import ViewIndividual from './page/ViewIndividual';
 function App() {
-
-
   return (
     <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/:name" element={<ViewIndividual />} />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/:mainname/:subname" element={<ViewIndividual />} />
+        </Routes>
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

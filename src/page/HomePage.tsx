@@ -14,7 +14,7 @@ const HomePage = () => {
   const { search } = useSelector(getSearchValue);
 
   const { data, isLoading, isSuccess, isError, refetch } = useQuery(
-    'get-spell',
+    ['get-spell', search],
     getSpell
   );
 

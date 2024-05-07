@@ -55,6 +55,8 @@
   padding: 20px;
   box-shadow: 5px 13px 11px -15px #000000;
   z-index: 999;
+  backdrop-filter: blur(4px);
+  background: transparent;
 }
 .search {
   width: 300px;

@@ -3,9 +3,9 @@ import { addFavroite } from "../stores/spellSlice";
 export const addToFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
     name: string,
-    dispatch: any,
-    setFav: any,
-    fav: boolean,
+    dispatch?: any,
+    setFav?: any,
+    fav?: boolean,
 ) => {
     e.stopPropagation();
     setFav(!fav);
@@ -16,7 +16,7 @@ export const addToFavroite = (
 export const removeFromFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
     name: string,
-    dispatch: any,
+    dispatch?: any,
 ) => {
     e.stopPropagation();
 };

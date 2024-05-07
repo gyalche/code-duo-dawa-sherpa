@@ -25,7 +25,10 @@ export default function BasicCard({ data }: { data: cardType }) {
   const navigate = useNavigate();
   const { listOfFavroite } = useSelector((state: any) => state?.spell);
   const viewSingle = (name: string) => {
-    navigate(`/${name}`);
+    const mainame = name?.split('/')[2];
+    const subname = name?.split('/')[3];
+    console.log('this is my name', mainame, subname);
+    navigate(`/${mainame}/${subname}`);
   };
 
   const addToFavroite = (
@@ -46,7 +49,7 @@ export default function BasicCard({ data }: { data: cardType }) {
   };
 
   return (
-    <Card className="card" onClick={() => viewSingle(data?.index)}>
+    <Card className="card" onClick={() => viewSingle(data?.url)}>
       <CardContent>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h5">{data?.name}</Typography>

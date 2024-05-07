@@ -1,33 +1,31 @@
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getIndividualSpell } from '../api/spell';
-import {
-  Box,
-  Card,
-  CardContent,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Layout } from './Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { FavSelectIcon, UnFavSelectIcon } from '../UI/IconButton/iconButton';
 import { addToFavroite, removeFromFavroite } from '../utils';
+import { BackButton } from '../UI/Buttons';
 
 const ViewIndividual = () => {
   const [myData, setMyData] = useState<any>(null);
   const [fav, setFav] = useState(false);
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  console.log('this is params', params);
   const { isLoading, isSuccess, isError, data } = useQuery(
-    ['get-single-spell', params?.name],
+    ['get-single-spell', params?.mainname, params?.subname],
     getIndividualSpell
   );
 
   const { listOfFavroite } = useSelector((state: any) => state?.spell);
 
+  const navigateBack = () => {
+    navigate(-1);
+  };
   useEffect(() => {
     setMyData(data);
   }, [data]);
@@ -37,6 +35,9 @@ const ViewIndividual = () => {
       <Box
         p={10}
         sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <Box>
+          <BackButton name="back" click={navigateBack} />
+        </Box>
         <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <Typography variant="h4">{myData?.name}</Typography>
           <>
