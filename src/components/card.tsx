@@ -32,36 +32,39 @@ export default function BasicCard({ data }: { data: cardType }) {
 
   const addToFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    index: string
+    data: any
   ) => {
+    console.log('this is check', data);
     e.stopPropagation();
     setFav(!fav);
-    dispatch(addFavroite(index));
+    dispatch(addFavroite(data));
   };
 
   //remove from favroite
   const removeFromFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    index: string
+    data: any
   ) => {
     e.stopPropagation();
     dispatch(clearFavroite());
     // dispatch(removeFavroite(index));
   };
 
-  console.log('list fo favroite', listOfFavroite);
+  const favIndex = Array.from(
+    new Set(listOfFavroite?.map((data: string) => data?.index))
+  );
 
   return (
     <Card className="card" onClick={() => viewSingle(data?.url)}>
       <CardContent>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h5">{data?.name}</Typography>
-          {listOfFavroite?.includes(data?.index) ? (
+          {favIndex?.includes(data?.index) ? (
             <FavSelectIcon
               onClick={(e) => removeFromFavroite(e, data?.index)}
             />
           ) : (
-            <UnFavSelectIcon onClick={(e) => addToFavroite(e, data?.index)} />
+            <UnFavSelectIcon onClick={(e) => addToFavroite(e, data)} />
           )}
         </Box>
         <Typography>Label {data?.level}</Typography>

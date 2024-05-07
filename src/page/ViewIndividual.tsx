@@ -22,7 +22,9 @@ const ViewIndividual = () => {
   );
 
   const { listOfFavroite } = useSelector((state: any) => state?.spell);
-
+  const favIndex = Array.from(
+    new Set(listOfFavroite?.map((data: string) => data?.index))
+  );
   useEffect(() => {
     setMyData(data);
   }, [data]);
@@ -38,15 +40,13 @@ const ViewIndividual = () => {
         <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <Typography variant="h4">{myData?.name}</Typography>
           <>
-            {listOfFavroite?.includes(data?.index) ? (
+            {favIndex?.includes(data?.index) ? (
               <FavSelectIcon
                 onClick={(e) => removeFromFavroite(e, data?.index, dispatch)}
               />
             ) : (
               <UnFavSelectIcon
-                onClick={(e) =>
-                  addToFavroite(e, data?.index, dispatch, setFav, fav)
-                }
+                onClick={(e) => addToFavroite(e, data, dispatch, setFav, fav)}
               />
             )}
           </>
