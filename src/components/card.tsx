@@ -7,7 +7,7 @@ import { cardType } from '../@types/index';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavroite } from '../stores/spellSlice';
+import { addFavroite, clearFavroite } from '../stores/spellSlice';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton } from '@mui/material';
 import { FavSelectIcon, UnFavSelectIcon } from '../UI/IconButton/iconButton';
@@ -27,26 +27,29 @@ export default function BasicCard({ data }: { data: cardType }) {
   const viewSingle = (name: string) => {
     const mainame = name?.split('/')[2];
     const subname = name?.split('/')[3];
-    console.log('this is my name', mainame, subname);
     navigate(`/${mainame}/${subname}`);
   };
 
   const addToFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    name: string
+    index: string
   ) => {
     e.stopPropagation();
     setFav(!fav);
-    dispatch(addFavroite(name));
+    dispatch(addFavroite(index));
   };
 
   //remove from favroite
   const removeFromFavroite = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    name: string
+    index: string
   ) => {
     e.stopPropagation();
+    dispatch(clearFavroite());
+    // dispatch(removeFavroite(index));
   };
+
+  console.log('list fo favroite', listOfFavroite);
 
   return (
     <Card className="card" onClick={() => viewSingle(data?.url)}>

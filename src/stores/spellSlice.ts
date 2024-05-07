@@ -22,6 +22,13 @@ const spellSlice = createSlice({
         addFavroite: (state, action: PayloadAction<any>) => {
             state.listOfFavroite.push(action.payload)
         },
+        // removeFavroite: (state, action: PayloadAction<any>) => {
+        //     const index = action.payload;
+        //     state.listOfFavroite?.splice(index, 1)
+        // },
+        clearFavroite: (state) => {
+            state.listOfFavroite = [];
+        },
         addSearch: (state, action: PayloadAction<any>) => {
             state.search = action.payload;
         }
@@ -29,7 +36,7 @@ const spellSlice = createSlice({
     },
 })
 
-export const { addFavroite, addSearch } = spellSlice.actions;
+export const { addFavroite, addSearch, clearFavroite } = spellSlice.actions;
 export const getSearchValue = (state: any) => state?.spell
 
 export default spellSlice.reducer

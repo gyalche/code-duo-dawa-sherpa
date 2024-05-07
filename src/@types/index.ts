@@ -1,6 +1,6 @@
 export type cardType = {
     index: string,
-    level: number,
+    level?: number,
     name: string,
-    url: string,
+    url?: string,
 }

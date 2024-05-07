@@ -21,20 +21,32 @@ const HomePage = () => {
   useEffect(() => {
     setMyData(data);
   }, [isSuccess]);
+  useEffect(() => {
+    refetch();
+    setMyData(data);
+  }, [search]);
+
+  console.log('mydata', myData?.response?.status);
 
   return (
     <Layout>
       <div className="card-display">
-        {isLoading ? (
-          // <Box sx={{display:'flex', alignItems:'center', justifyContent:'center'}}>
-          <SkeletionLoading />
+        {myData?.response?.status === 404 ? (
+          <p>No data found.. for {search}</p>
         ) : (
           <>
-            {myData?.results?.map((data: cardType, index: number) => (
-              <Box sx={{ padding: '10px' }} key={data?.index}>
-                <BasicCard data={data} />
-              </Box>
-            ))}
+            {isLoading ? (
+              // <Box sx={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+              <SkeletionLoading />
+            ) : (
+              <>
+                {myData?.results?.map((data: cardType, index: number) => (
+                  <Box sx={{ padding: '10px' }} key={data?.index}>
+                    <BasicCard data={data} />
+                  </Box>
+                ))}
+              </>
+            )}
           </>
         )}
       </div>

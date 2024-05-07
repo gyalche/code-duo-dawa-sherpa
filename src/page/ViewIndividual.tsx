@@ -23,9 +23,6 @@ const ViewIndividual = () => {
 
   const { listOfFavroite } = useSelector((state: any) => state?.spell);
 
-  const navigateBack = () => {
-    navigate(-1);
-  };
   useEffect(() => {
     setMyData(data);
   }, [data]);
@@ -36,7 +33,7 @@ const ViewIndividual = () => {
         p={10}
         sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <Box>
-          <BackButton name="back" click={navigateBack} />
+          <BackButton name="back" />
         </Box>
         <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <Typography variant="h4">{myData?.name}</Typography>

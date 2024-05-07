@@ -15,6 +15,13 @@
   justify-content: space-around;
 }
 
+@mixin flex-col-spaceBetween {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 @mixin for-phone-only {
   @media (max-width: 599) {
     @content;
@@ -66,4 +73,14 @@
   box-shadow: 3px -4px 9px -7px #000000;
   border: 1px solid silver;
   border-radius: 10px;
+}
+.error404 {
+  @include flex-col-spaceBetween();
+  gap: 10px;
+  height: 100vh;
+  width: 100%;
+  .error-img {
+    width: 90%;
+    height: 60%;
+  }
 }
